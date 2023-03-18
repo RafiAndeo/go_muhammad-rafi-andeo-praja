@@ -1,0 +1,71 @@
+INSERT INTO operators (id, name) VALUES (1, "Toko A");
+INSERT INTO operators (id, name) VALUES (2, "Toko B");
+INSERT INTO operators (id, name) VALUES (3, "Toko C");
+INSERT INTO operators (id, name) VALUES (4, "Toko D");
+INSERT INTO operators (id, name) VALUES (5, "Toko E");
+
+INSERT INTO product_types (id, name) VALUES (1, "Alat Makan");
+INSERT INTO product_types (id, name) VALUES (2, "Alat Tulis");
+INSERT INTO product_types (id, name) VALUES (3, "Alat Berenang");
+
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (1, 1, 3, "A1", "Garpu", 1);
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (2, 1, 3, "A2", "Sendok", 1);
+
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (3, 2, 1, "B3", "Pulpen", 1);
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (4, 2, 1, "B4", "Pensil", 1);
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (5, 2, 1, "B5", "Penghapus", 1);
+
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (6, 3, 4, "C6", "Pelampung", 1);
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (7, 3, 4, "C7", "Kaca Mata Berenang", 1);
+INSERT INTO products (id, product_type_id, operator_id, code, name, status) VALUES (8, 3, 4, "C8", "Pelampung Tangan", 1);
+
+INSERT INTO product_descriptions (description) VALUES ("Alat Makan Sendok");
+INSERT INTO product_descriptions (description) VALUES ("Alat Makan Garpu");
+INSERT INTO product_descriptions (description) VALUES ("Alat Tulis Pulpen");
+INSERT INTO product_descriptions (description) VALUES ("Alat Tulis Pensil");
+INSERT INTO product_descriptions (description) VALUES ("Alat Tulis Penghapus");
+INSERT INTO product_descriptions (description) VALUES ("Alat Berenang Pelampung");
+INSERT INTO product_descriptions (description) VALUES ("Alat Berenang Kaca Mata Berenang");
+INSERT INTO product_descriptions (description) VALUES ("Alat Berenang Pelampung Tangan");
+
+INSERT INTO payment_methods (name, STATUS) VALUES ("OVO", 1);
+INSERT INTO payment_methods (name, STATUS) VALUES ("GOPAY", 2);
+INSERT INTO payment_methods (name, STATUS) VALUES ("DANA", 3);
+
+INSERT INTO users (dob, gender) VALUES (2023-03-18, "L");
+INSERT INTO users (dob, gender) VALUES (2023-03-19, "P");
+INSERT INTO users (dob, gender) VALUES (2023-03-20, "P");
+INSERT INTO users (dob, gender) VALUES (2023-03-21, "P");
+INSERT INTO users (dob, gender) VALUES (2023-03-22, "L");
+
+INSERT INTO transactions (id, user_id, payment_method_id, status, total_qty, total_price) VALUES (1, 1, 1, "SUSPENDED", 10, 100000);
+INSERT INTO transactions (id, user_id, payment_method_id, status, total_qty, total_price) VALUES (2, 2, 1, "SUCCESS", 5, 50000);
+INSERT INTO transactions (id, user_id, payment_method_id, status, total_qty, total_price) VALUES (3, 3, 2, "FAILED", 1, 10000);
+
+INSERT INTO transaction_details (id, transaction_id, product_id, status, qty, price) VALUES (1, 1, 1, "SUSPENDED", 10, 100000);
+INSERT INTO transaction_details (id, transaction_id, product_id, status, qty, price) VALUES (2, 2, 2, "SUCCESS", 5, 50000);
+INSERT INTO transaction_details (id, transaction_id, product_id, status, qty, price) VALUES (3, 3, 3, "FAILED", 1, 10000);
+
+SELECT * FROM users WHERE gender LIKE "%L";
+
+SELECT * FROM products WHERE id = 3;
+
+SELECT * FROM operators WHERE name LIKE "%a";
+
+SELECT COUNT(gender) FROM users WHERE gender LIKE "%P";
+
+SELECT * FROM operators ORDER BY name;
+
+SELECT * FROM products LIMIT 5;
+
+UPDATE products SET name = "Product Dummy" WHERE id = 1;
+
+UPDATE transaction_details SET qty = 3 WHERE product_id = 1;
+
+DELETE FROM products WHERE id = 1
+
+DELETE FROM products WHERE product_type_id = 1
+
+SELECT * FROM transactions WHERE id = 1 UNION SELECT * FROM transactions WHERE id = 2;
+
+SELECT total_price FROM transactions WHERE id = 1
