@@ -69,3 +69,52 @@ DELETE FROM products WHERE product_type_id = 1
 SELECT * FROM transactions WHERE id = 1 UNION SELECT * FROM transactions WHERE id = 2;
 
 SELECT total_price FROM transactions WHERE id = 1
+
+SELECT COUNT(*) as total_transaksi
+FROM transaction_details
+JOIN products ON transaction_details.product_id = products.id
+WHERE products.product_type_id = 2;
+
+SELECT products.*, product_types.name AS type_name
+FROM products
+JOIN product_types ON products.product_type_id = product_types.id;
+
+SELECT transaction_details.*, products.name AS product_name, users.id AS user_id
+FROM transaction_details
+JOIN products ON transaction_details.product_id = products.id
+JOIN users ON transaction_details.transaction_id = users.id;
+
+DELIMITER //
+
+CREATE FUNCTION delete_transaction_detail(transaction_id INT) RETURNS BOOLEAN
+BEGIN
+    DECLARE row_count INT;
+    DELETE FROM transaction_detail WHERE transaction_id = transaction_id;
+    SET row_count = ROW_COUNT();
+    IF row_count > 0 THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE FUNCTION update_product_qty(transaction_id INT) RETURNS BOOLEAN
+BEGIN
+    DECLARE row_count INT;
+    DECLARE product_id INT;
+    DECLARE qty INT;
+    SELECT product_id, qty INTO product_id, qty FROM transaction_detail WHERE transaction_id = transaction_id;
+    UPDATE products SET total_qty = total_qty + qty WHERE id = product_id;
+    SET row_count = ROW_COUNT();
+    IF row_count > 0 THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END//
+
+DELIMITER ;
