@@ -1,0 +1,15 @@
+# Create User (POST)
+curl -X POST -H "Content-type: application/json" -d "{\"name\":\"Rafi Andeo\", \"email\":\"rafiandeo@gmail.com\", \"password\":\"123456\"}" localhost:1323/users
+curl -X POST -H "Content-type: application/json" -d "{\"name\":\"Joko\", \"email\":\"Joko@gmail.com\", \"password\":\"654321\"}" localhost:1323/users
+
+# Get All User (GET)
+curl -X GET localhost:1323/users
+
+# Get User By Id (GET)
+curl -X GET localhost:1323/users/2
+
+# Delete User By Id (DELETE)
+curl -X DELETE localhost:1323/users/2
+
+# Update User (PUT)
+curl -X PUT -H "Content-type: application/json" -d "{\"name\":\"Rafi Andeo 2\", \"email\":\"rafiandeo2@mail.id\", \"password\":\"654321\"}" localhost:1323/users/1
