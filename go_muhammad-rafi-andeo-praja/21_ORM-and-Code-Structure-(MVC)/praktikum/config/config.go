@@ -2,7 +2,8 @@ package config
 
 import (
 	"fmt"
-	"project/models"
+
+	"github.com/RafiAndeo/go_muhammad-rafi-andeo-praja/go_muhammad-rafi-andeo-praja/21_ORM-and-Code-Structure-(MVC)/praktikum/models"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
