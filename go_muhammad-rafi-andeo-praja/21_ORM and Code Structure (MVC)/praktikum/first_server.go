@@ -130,3 +130,15 @@ func UpdateUserController(c echo.Context) error {
 		"user":    user,
 	})
 }
+
+func main1() {
+	e := echo.New()
+
+	e.GET("/users", GetUsersController)
+	e.GET("/user/:id", GetUserController)
+	e.POST("/user", CreateUserController)
+	e.DELETE("/user/:id", DeleteUserController)
+	e.PUT("/user/:id", UpdateUserController)
+
+	e.Logger.Fatal(e.Start(":8000"))
+}
